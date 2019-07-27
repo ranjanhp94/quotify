@@ -1,7 +1,7 @@
 import React from 'react';
 
-class AddQuote extends React.Component{
-    constructor(props){
+class AddQuote extends React.Component {
+    constructor(props) {
         super(props);
         this.state = {
             quoteText: '',
@@ -11,13 +11,14 @@ class AddQuote extends React.Component{
         this.handleAdd = this.handleAdd.bind(this);
     }
 
-    handleChange(event){
+    handleChange(event) {
         this.setState({
-            [event.target.name] : event.target.value
+            [event.target.name]: event.target.value
         })
     }
 
-    handleAdd(){
+    handleAdd(e) {
+        e.preventDefault();
         let quote = {
             quoteText: this.state.quoteText,
             quoteAuthor: this.state.quoteAuthor
@@ -25,20 +26,20 @@ class AddQuote extends React.Component{
         this.props.addQuote(quote)
     }
 
-    render(){
-        return(
-            <div>
-                    <textarea onChange = {this.handleChange} 
-                        name = "quoteText" 
-                        placeholder = "add quote"
-                        cols = "20" 
-                        rows = "5">
-                    </textarea>
-                    <br />
-                    <input type="text" onChange = {this.handleChange} name = "quoteAuthor" placeholder = "add author"></input><br /><br />
-                    <button className="btn btn-success" onClick={this.handleAdd} >Add Quote</button>
-                    <button type = "reset">Reset</button>
-            </div>
+    render() {
+        return (
+            <form>
+                <textarea onChange={this.handleChange}
+                    name="quoteText"
+                    placeholder="Add quote"
+                    cols="50"
+                    rows="5">
+                </textarea>
+                <br />
+                <input type="text" onChange={this.handleChange} name="quoteAuthor" placeholder="Add author"></input><br /><br />
+                <button className="btn btn-success" onClick={this.handleAdd}>Add Quote</button>{' '}
+                <button className="btn btn-secondary" type="reset" value="reset">Reset</button>
+            </form>
         )
     }
 }
